@@ -1,14 +1,17 @@
 package custodybattle;
 
 import java.awt.Color;
+import java.util.Random;
+
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 
 public class Ball extends GraphicsGroup{
 
-    public static final double BALL_RADIUS = 15;
+    private static final double BALL_RADIUS = 15;
+    private static final double speed = 5;
 
-    private Ellipse ballShape;
+    private Ellipse ball;
     private double centerX;
     private double centerY;
     private double maxX;
@@ -17,18 +20,23 @@ public class Ball extends GraphicsGroup{
     private double YVelocity;
 
 
-    public Ball(double centerX, double centerY, double initialSpeed, double initialAngle, double maxX, double maxY) {
-        ballShape = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
-        ballShape.setFillColor(Color.BLACK);
-        ballShape.setStrokeColor(Color.BLACK);
+    public Ball(double centerX, double centerY, double maxX, double maxY) {
+        ball = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
+        ball.setFillColor(Color.BLACK);
+        ball.setStrokeColor(Color.BLACK);
         this.centerX = centerX;
         this.centerY = centerY;
         this.maxX = maxX;
         this.maxY = maxY;
-        
-        double initialAngleRadians = Math.toRadians(initialAngle);
-        XVelocity = initialSpeed + Math.cos(initialAngleRadians);
-        YVelocity = initialSpeed + -Math.sin(initialAngleRadians);
+
+
+        Random random = new Random();
+        double rand = random.nextDouble();
+        double max = 360;
+        double min = 10;
+        double initialAngleRadians = Math.toRadians(min + ((max-min) * rand));
+        XVelocity = speed + Math.cos(initialAngleRadians);
+        YVelocity = speed + -Math.sin(initialAngleRadians);
         
     }
     
@@ -36,7 +44,7 @@ public class Ball extends GraphicsGroup{
         double newX = centerX + XVelocity;
         double newY = centerY + YVelocity;
 
-        ballShape.setCenter(newX, newY);
+        ball.setCenter(newX, newY);
         centerX = newX;
         centerY = newY;
 
@@ -46,6 +54,10 @@ public class Ball extends GraphicsGroup{
         if (newY <= 0 || newY >= maxY) {
             YVelocity *= -1;
         }
+    }
+
+    public Ellipse getGraphics() {
+        return ball;
     }
 
 }
