@@ -17,9 +17,10 @@ public class CustodyBattle {
         makeBall();
         canvas.animate(event -> {
             ball.updatePosition();
+            paddle1.intersectsPaddle(ball);
+            paddle2.intersectsPaddle(ball);
             List<String> keysPressed = canvas.getKeysPressed().stream().map(key -> key.toString()).toList();
             if (keysPressed.contains("S")) {
-                // paddle1.getGraphics().setY(paddle1.getGraphics().getY() + 10);
                 paddle1.movePaddle(10);
             } else if (keysPressed.contains("W")) {
                 paddle1.movePaddle(-10);
@@ -30,10 +31,21 @@ public class CustodyBattle {
             } else if (keysPressed.contains("UP_ARROW")) {
                 paddle2.movePaddle(-10);
             }
+
         });
 
-
     }
+
+    // public boolean intersectsPaddle1() {
+    //     if (ball.getElementAt(paddle1.getX(), paddle1.getY()) != null) {
+    //         double dx = ball.getXVelocity();
+    //         dx *= -1;
+    //         ball.setXVelocity(dx);
+    //     } else if (ball.)
+
+
+    //     return false;
+    // }
 
 
 

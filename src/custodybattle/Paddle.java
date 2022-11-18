@@ -30,6 +30,17 @@ public class Paddle extends GraphicsGroup {
         }
     }
 
+    public boolean intersectsPaddle(Ball ball) {
+        if (getElementAt(ball.ballTopSide()) != null || getElementAt(ball.ballBottomSide()) != null ||
+            getElementAt(ball.ballLeftSide()) != null || getElementAt(ball.ballRightSide()) != null) {
+            double dx = ball.getXVelocity();
+            dx *= -1;
+            ball.setXVelocity(dx);
+            return true;
+        } 
+        return false;
+    }
+
     public double getCenterY() {
         return centerY;
     }

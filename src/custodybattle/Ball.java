@@ -5,6 +5,7 @@ import java.util.Random;
 
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Point;
 
 public class Ball extends GraphicsGroup{
 
@@ -56,8 +57,52 @@ public class Ball extends GraphicsGroup{
         }
     }
 
+    public double getXVelocity() {
+        return XVelocity;
+    }
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public double getCenterY() {
+        return centerY;
+    }
+
+    public void setXVelocity(double xVelocity) {
+        XVelocity = xVelocity;
+    }
+
+    public void setYVelocity(double yVelocity) {
+        YVelocity = yVelocity;
+    }
+
+    public double getYVelocity() {
+        return YVelocity;
+    }
+
     public Ellipse getGraphics() {
         return ball;
     }
 
+
+    public Point ballRightSide(){
+        Point right = new Point(getCenterX() + BALL_RADIUS, getCenterY());
+        return right;
+    }
+
+    public Point ballLeftSide(){
+        Point left = new Point(getCenterX() - BALL_RADIUS, getCenterY());
+        return left;
+    }
+
+    public Point ballTopSide(){
+        Point top = new Point(getCenterX(), getCenterY() - BALL_RADIUS);
+        return top;
+    }
+
+    public Point ballBottomSide(){
+        Point bottom = new Point(getCenterX(), getCenterY() + BALL_RADIUS);
+        return bottom;
+    }
 }
