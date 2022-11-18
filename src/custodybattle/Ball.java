@@ -69,6 +69,14 @@ public class Ball extends GraphicsGroup{
         return centerY;
     }
 
+    public void setReverseXVel() {
+        XVelocity *= -1;
+    }
+
+    public void setReverseYVel() {
+        YVelocity *= -1;
+    }
+
     public void setXVelocity(double xVelocity) {
         XVelocity = xVelocity;
     }

@@ -2,6 +2,7 @@ package custodybattle;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
 
@@ -30,15 +31,31 @@ public class Paddle extends GraphicsGroup {
         }
     }
 
-    public boolean intersectsPaddle(Ball ball) {
-        if (getElementAt(ball.ballTopSide()) != null || getElementAt(ball.ballBottomSide()) != null ||
-            getElementAt(ball.ballLeftSide()) != null || getElementAt(ball.ballRightSide()) != null) {
-            double dx = ball.getXVelocity();
-            dx *= -1;
-            ball.setXVelocity(dx);
-            return true;
-        } 
-        return false;
+    // public boolean intersectsPaddle(Ball ball, CanvasWindow canvas) {
+    //     // System.out.println(canvas.getElementAt(ball.ballLeftSide()));
+    //     if (canvas.getElementAt(ball.ballLeftSide()) != null || canvas.getElementAt(ball.ballRightSide()) != null) {
+    //         // double dx = ball.getXVelocity();
+    //         // dx *= -1;
+    //         // ball.setXVelocity(dx);
+    //         System.out.println(ball.getXVelocity());
+    //         ball.setReverseXVel();
+    //         System.out.println(ball.getXVelocity());
+    //         // System.out.println("hello");
+    //         return true;
+    //     } else if (canvas.getElementAt(ball.ballTopSide()) != null || canvas.getElementAt(ball.ballBottomSide()) != null) {
+    //         // double dy = ball.getYVelocity();
+    //         // dy *= -1;
+    //         // ball.setYVelocity(dy);
+    //         System.out.println(ball.getXVelocity());
+    //         ball.setReverseYVel();
+    //         System.out.println(ball.getYVelocity());
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    public boolean testHit(Point point) {
+        return paddle.testHit(point.getX(), point.getY());
     }
 
     public double getCenterY() {
