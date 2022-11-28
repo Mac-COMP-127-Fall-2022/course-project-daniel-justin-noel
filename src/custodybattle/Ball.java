@@ -56,6 +56,7 @@ public class Ball extends GraphicsGroup{
 
         if (newX <= 0 || newX >= maxX) {
             XVelocity *= -1;
+            
         }
         if (newY <= 0 || newY >= maxY) {
             YVelocity *= -1;
@@ -120,11 +121,11 @@ public class Ball extends GraphicsGroup{
     }
 
     public boolean player1Scored() {
-        return ball.getX() >= maxX;
+        return ballBottomSide().getX() >= maxX;
     }
 
     public boolean player2Scored() {
-        return ball.getX() <= 0;
+        return ballTopSide().getX() <= 0;
     }
 
     public void addtoCanvas (CanvasWindow canvas) {
