@@ -2,8 +2,10 @@ package custodybattle;
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
+import edu.macalester.graphics.Image;
 
 public class CustodyBattle {
     public static final int CANVAS_WIDTH = 800;
@@ -11,12 +13,10 @@ public class CustodyBattle {
     private CanvasWindow canvas;
     private Paddle paddle1, paddle2;
     private Ball ball;
+    // private final GraphicsGroup graphics;
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
-        // Rectangle rectangle = new Rectangle(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 100, 400);
-        // canvas.add(rectangle);
-        // System.out.println(canvas.getElementAt(rectangle.getCenter()));
         makePaddles();
         makeBall();
         canvas.animate(event -> {
@@ -70,7 +70,15 @@ public class CustodyBattle {
     public void makeBall() {
         ball = new Ball(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.add(ball.getGraphics());
+        // Image babyHead = new Image(0, 0, "boss baby face.png");
+        // babyHead.setMaxHeight(55);
+        // getGraphics().add(babyHead);
+        // canvas.add(graphics);
     }
+
+    // public GraphicsGroup getGraphics() {
+    //     return graphics;
+    // }
 
     public static void main(String[] args){
         new CustodyBattle();

@@ -3,14 +3,16 @@ package custodybattle;
 import java.awt.Color;
 import java.util.Random;
 
+import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
+import edu.macalester.graphics.Image;
 
 public class Ball extends GraphicsGroup{
 
     private static final double BALL_RADIUS = 15;
-    private static final double speed = 5;
+    private static final double speed = 7;
 
     private Ellipse ball;
     private double centerX;
@@ -25,6 +27,7 @@ public class Ball extends GraphicsGroup{
         ball = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
         ball.setFillColor(Color.BLACK);
         ball.setStrokeColor(Color.BLACK);
+        // Image babyHead = new Image(centerX, centerY, "boss baby face.png");
         this.centerX = centerX;
         this.centerY = centerY;
         this.maxX = maxX;
@@ -112,5 +115,9 @@ public class Ball extends GraphicsGroup{
     public Point ballBottomSide(){
         Point bottom = new Point(getCenterX(), getCenterY() + BALL_RADIUS);
         return bottom;
+    }
+
+    public void addtoCanvas (CanvasWindow canvas) {
+        canvas.add(this);
     }
 }
