@@ -12,9 +12,10 @@ import edu.macalester.graphics.Image;
 public class Ball extends GraphicsGroup{
 
     private static final double BALL_RADIUS = 15;
-    private static final double speed = 7;
+    private static final double speed = 4;
 
     private Ellipse ball;
+    private Image babyHead;
     private double centerX;
     private double centerY;
     private double maxX;
@@ -27,7 +28,7 @@ public class Ball extends GraphicsGroup{
         ball = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
         ball.setFillColor(Color.BLACK);
         ball.setStrokeColor(Color.BLACK);
-        // Image babyHead = new Image(centerX, centerY, "boss baby face.png");
+        babyHead = new Image(centerX, centerY, "boss baby face.png");
         this.centerX = centerX;
         this.centerY = centerY;
         this.maxX = maxX;
@@ -49,6 +50,7 @@ public class Ball extends GraphicsGroup{
         double newY = centerY + YVelocity;
 
         ball.setCenter(newX, newY);
+        babyHead.setCenter(newX, newY);
         centerX = newX;
         centerY = newY;
 
@@ -115,6 +117,14 @@ public class Ball extends GraphicsGroup{
     public Point ballBottomSide(){
         Point bottom = new Point(getCenterX(), getCenterY() + BALL_RADIUS);
         return bottom;
+    }
+
+    public boolean player1Scored() {
+        return ball.getX() >= maxX;
+    }
+
+    public boolean player2Scored() {
+        return ball.getX() <= 0;
     }
 
     public void addtoCanvas (CanvasWindow canvas) {
