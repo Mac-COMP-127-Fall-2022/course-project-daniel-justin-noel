@@ -16,16 +16,20 @@ public class CustodyBattle {
     private Ball ball;
     private GraphicsText player1Points, player2Points;
     private Integer pointCounter1, pointCounter2;
+    private Image court;
     // private final GraphicsGroup graphics;
 
     public CustodyBattle() {
         pointCounter1 = 0;
         pointCounter2 = 0;
         player1Points = new GraphicsText("" + pointCounter1, (CANVAS_WIDTH/2) - 150, 100);
-        player2Points = new GraphicsText("" + pointCounter2, (CANVAS_WIDTH/2) + 150, 100);
+        player2Points = new GraphicsText("" + pointCounter2, (CANVAS_WIDTH/2) +150, 100);
         player1Points.setFontSize(50);
         player2Points.setFontSize(50);
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
+        court = new Image(0, 0, "divorce-court-background.jpg");
+        court.setScale(0.5, 0.5);
+        canvas.add(court);
         makePaddles();
         makeBall();
         canvas.add(player1Points);
