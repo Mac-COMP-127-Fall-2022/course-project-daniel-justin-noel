@@ -12,10 +12,10 @@ import edu.macalester.graphics.Image;
 public class Ball extends GraphicsGroup{
 
     private static final double BALL_RADIUS = 15;
-    private static final double speed = 5;
+    private static final double speed = 7;
 
     private Ellipse ball;
-    // private Image babyHead;
+    private Image babyHead;
     private double centerX;
     private double centerY;
     private double maxX;
@@ -28,15 +28,14 @@ public class Ball extends GraphicsGroup{
         ball = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
         ball.setFillColor(Color.BLACK);
         ball.setStrokeColor(Color.BLACK);
-        // babyHead = new Image(centerX, centerY, "bossBabyFace.png");
-        // babyHead = new Image(centerX, centerY, "bossBabyFace.png");
-        // babyHead.setMaxHeight(55);
-        // babyHead.setMaxHeight(55);
+ 
+        babyHead = new Image(centerX, centerY, "bossBabyFace.png");
+        babyHead.setMaxHeight(45);
+
         this.centerX = centerX;
         this.centerY = centerY;
         this.maxX = maxX;
         this.maxY = maxY;
-        // addtoCanvas(babyHead);
 
 
         Random random = new Random();
@@ -54,7 +53,7 @@ public class Ball extends GraphicsGroup{
         double newY = centerY + YVelocity;
 
         ball.setCenter(newX, newY);
-        // babyHead.setCenter(newX, newY);
+        babyHead.setCenter(ball.getCenter().getX(), ball.getCenter().getY());
         centerX = newX;
         centerY = newY;
 
@@ -133,12 +132,7 @@ public class Ball extends GraphicsGroup{
         return ballTopSide().getX() <= 0;
     }
 
-    // public void addtoCanvas(CanvasWindow canvas) {
-    //     canvas.add(babyHead);
-    // }
-    // public void addImagetoCanvas(Image babyHeadImage) {
-    //     CanvasWindow canvas;
-    //     this.canvas = canvas
-    //     canvas.add(babyHeadImage);
-    // }
+    public Image getImage() {
+        return babyHead;
+    }
 }

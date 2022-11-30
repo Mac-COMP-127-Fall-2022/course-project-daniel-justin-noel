@@ -1,4 +1,5 @@
 package custodybattle;
+import java.awt.Color;
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
@@ -22,23 +23,29 @@ public class CustodyBattle {
     public CustodyBattle() {
         pointCounter1 = 0;
         pointCounter2 = 0;
-        player1Points = new GraphicsText("" + pointCounter1, (CANVAS_WIDTH/2) - 150, 100);
-        player2Points = new GraphicsText("" + pointCounter2, (CANVAS_WIDTH/2) +150, 100);
+        player1Points = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/2) - 150, 100);
+        player2Points = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/2) + 150, 100);
+        // player1Points.setStrokeColor(Color.WHITE);
+        player1Points.setFillColor(Color.WHITE);
+        player2Points.setFillColor(Color.WHITE);
         player1Points.setFontSize(50);
         player2Points.setFontSize(50);
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         court = new Image(0, 0, "divorce-court-background.jpg");
+        
         court.setScale(0.5, 0.5);
+        court.setCenter(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
         canvas.add(court);
+    
         makePaddles();
         makeBall();
         canvas.add(player1Points);
         canvas.add(player2Points);
+        canvas.add(ball.getImage());
+
         canvas.animate(event -> {
             ball.updatePosition();
             keyCheck();
-            // paddle1.intersectsPaddle(ball);
-            // paddle2.intersectsPaddle(ball);
             intersectsPaddle(ball);
             checkScore();
 
@@ -52,8 +59,8 @@ public class CustodyBattle {
             ball.setReverseXVel();
             return true;
 
-        } else if (paddle1.testHit(ball.ballTopSide()) || paddle1.testHit(ball.ballTopSide())
-            || paddle2.testHit(ball.ballBottomSide()) || paddle2.testHit(ball.ballBottomSide())) {
+        } else if (paddle1.testHit(ball.ballTopSide()) || paddle1.testHit(ball.ballBottomSide())
+            || paddle2.testHit(ball.ballTopSide()) || paddle2.testHit(ball.ballBottomSide())) {
             ball.setReverseYVel();
             return true;
         }
@@ -86,25 +93,17 @@ public class CustodyBattle {
     public void makeBall() {
         ball = new Ball(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.add(ball.getGraphics());
-        Image babyHead = new Image(ball.getCenterX(), ball.getCenterY(), "boss baby face.png");
-        babyHead.setMaxHeight(55);
-        // getGraphics().add(babyHead);
-        // canvas.add(graphics);
     }
 
     private void checkScore() {
         if (ball.player1Scored()) {
-            pointCounter1++;
-            player1Points.setText("" + pointCounter1);
+            pointCounter1 += 100;
+            player1Points.setText("$ " + pointCounter1);
         } else if (ball.player2Scored()) {
-            pointCounter2++;
-            player2Points.setText("" + pointCounter2);
+            pointCounter2 += 100;
+            player2Points.setText("$ " + pointCounter2);
         }
     }
-
-    // public GraphicsGroup getGraphics() {
-    //     return graphics;
-    // }
 
     public static void main(String[] args){
         new CustodyBattle();
