@@ -13,12 +13,12 @@ public class Paddle extends GraphicsGroup {
     private Image dad, mom;
     private double centerX, centerY;
     private final double PADDLE_WIDTH = 10;
-    private final double PADDLE_HEIGHT = 100;
+    private double paddleHeight = 100;
 
     public Paddle(double centerX, double centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
-        paddle = new Rectangle(centerX, centerY, PADDLE_WIDTH, PADDLE_HEIGHT);
+        paddle = new Rectangle(centerX, centerY, PADDLE_WIDTH, paddleHeight);
         paddle.setFillColor(Color.WHITE);
         paddle.setStrokeColor(Color.WHITE);
 
@@ -43,33 +43,20 @@ public class Paddle extends GraphicsGroup {
     public Image getPaddle1Image() {
         return dad;
     }
+    
+    public void setDad(Image dad) {
+        this.dad = dad;
+        dad.setMaxHeight(200);
+        dad.setCenter(dad.getCenter().getX() - 20, dad.getCenter().getY() - 5);
+    }
+
+    public void setMom(Image mom) {
+        this.mom = mom;
+    }
 
     public Image getPaddle2Image() {
         return mom;
     }
-
-    // public boolean intersectsPaddle(Ball ball, CanvasWindow canvas) {
-    //     // System.out.println(canvas.getElementAt(ball.ballLeftSide()));
-    //     if (canvas.getElementAt(ball.ballLeftSide()) != null || canvas.getElementAt(ball.ballRightSide()) != null) {
-    //         // double dx = ball.getXVelocity();
-    //         // dx *= -1;
-    //         // ball.setXVelocity(dx);
-    //         System.out.println(ball.getXVelocity());
-    //         ball.setReverseXVel();
-    //         System.out.println(ball.getXVelocity());
-    //         // System.out.println("hello");
-    //         return true;
-    //     } else if (canvas.getElementAt(ball.ballTopSide()) != null || canvas.getElementAt(ball.ballBottomSide()) != null) {
-    //         // double dy = ball.getYVelocity();
-    //         // dy *= -1;
-    //         // ball.setYVelocity(dy);
-    //         System.out.println(ball.getXVelocity());
-    //         ball.setReverseYVel();
-    //         System.out.println(ball.getYVelocity());
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     public boolean testHit(Point point) {
         return paddle.testHit(point.getX(), point.getY());
@@ -82,5 +69,21 @@ public class Paddle extends GraphicsGroup {
     public Rectangle getGraphics() {
         return paddle;
     }
+
+    public void setPaddleHeight(double paddleHeight, CanvasWindow canvas) {
+        double xVal = paddle.getX();
+        double yVal = paddle.getY();
+        
+        canvas.remove(paddle);
+        paddle = new Rectangle(xVal, yVal, PADDLE_WIDTH, paddleHeight);
+        paddle.setFillColor(Color.WHITE);
+        paddle.setStrokeColor(Color.WHITE);
+        canvas.add(paddle);
+    }
+
+    public double getPaddleHeight() {
+        return paddleHeight;
+    }
+
 
 }

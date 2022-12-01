@@ -16,22 +16,21 @@ public class CustodyBattle {
     private CanvasWindow canvas;
     private Paddle paddle1, paddle2;
     private Ball ball;
-    private GraphicsText player1Points, player2Points;
-    private Integer pointCounter1, pointCounter2;
-    private Image court, dad, mom;
+    private GraphicsText p1PointText, p2PointText;
+    private int pointCounter1, pointCounter2;
+    private Image court;
+    private boolean dadIncreased = false;
     // private final GraphicsGroup graphics;
 
     public CustodyBattle() {
-        pointCounter1 = 0;
-        pointCounter2 = 0;
-        player1Points = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/3) - 100, 75);
-        player2Points = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/3) + 250, 75);
-        player1Points.setFillColor(Color.WHITE);
-        player2Points.setFillColor(Color.WHITE);
-        player1Points.setFontSize(50);
-        player2Points.setFontSize(50);
-        player1Points.setFontStyle(FontStyle.BOLD_ITALIC);
-        player2Points.setFontStyle(FontStyle.BOLD_ITALIC);
+        p1PointText = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/3) - 100, 75);
+        p2PointText = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/3) + 250, 75);
+        p1PointText.setFillColor(Color.WHITE);
+        p2PointText.setFillColor(Color.WHITE);
+        p1PointText.setFontSize(50);
+        p2PointText.setFontSize(50);
+        p1PointText.setFontStyle(FontStyle.BOLD_ITALIC);
+        p2PointText.setFontStyle(FontStyle.BOLD_ITALIC);
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         court = new Image(0, 0, "divorce-court-background.jpg");
         
@@ -41,8 +40,8 @@ public class CustodyBattle {
     
         makePaddles();
         makeBall();
-        canvas.add(player1Points);
-        canvas.add(player2Points);
+        canvas.add(p1PointText);
+        canvas.add(p2PointText);
         canvas.add(ball.getImage());
         canvas.add(paddle1.getPaddle1Image());
         canvas.add(paddle2.getPaddle2Image());
@@ -52,7 +51,7 @@ public class CustodyBattle {
             keyCheck();
             intersectsPaddle(ball);
             checkScore();
-
+            biggerPaddle();
         });
 
     }
@@ -103,19 +102,20 @@ public class CustodyBattle {
     private void checkScore() {
         if (ball.player1Scored()) {
             pointCounter1 += 100;
-            player1Points.setText("$ " + pointCounter1);
+            p1PointText.setText("$ " + pointCounter1);
         } else if (ball.player2Scored()) {
             pointCounter2 += 100;
-            player2Points.setText("$ " + pointCounter2);
+            p2PointText.setText("$ " + pointCounter2);
         }
     }
 
-        public Image getPaddle1Image() {
-        return dad;
-    }
-
-    public Image getPaddle2Image() {
-        return mom;
+    public void biggerPaddle() {
+        if (pointCounter1 >= 600 && !dadIncreased) {
+            dadIncreased = true;
+            paddle1.setPaddleHeight(paddle1.getPaddleHeight() + 80, canvas);
+            paddle1.setDad(paddle1.getPaddle1Image());
+            canvas.add(paddle1.getPaddle1Image());
+        }
     }
 
     public static void main(String[] args){
