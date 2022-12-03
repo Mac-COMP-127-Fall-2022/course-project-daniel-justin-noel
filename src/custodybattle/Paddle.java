@@ -47,11 +47,13 @@ public class Paddle extends GraphicsGroup {
     public void setDad(Image dad) {
         this.dad = dad;
         dad.setMaxHeight(200);
-        dad.setCenter(dad.getCenter().getX() - 20, dad.getCenter().getY() - 5);
+        dad.setCenter(dad.getCenter().getX() - 20, dad.getCenter().getY() - 8);
     }
 
     public void setMom(Image mom) {
         this.mom = mom;
+        mom.setMaxHeight(200);
+        mom.setCenter(mom.getCenter().getX() - 20, mom.getCenter().getY());
     }
 
     public Image getPaddle2Image() {
