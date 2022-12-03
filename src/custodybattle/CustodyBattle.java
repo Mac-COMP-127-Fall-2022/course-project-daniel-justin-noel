@@ -43,9 +43,9 @@ public class CustodyBattle {
             canvas.add(p2PointText);
             canvas.add(ball.getImage());
             canvas.add(paddle1.getPaddle1Image());
-            canvas.add(paddle2.getPaddle2Image());
+            canvas.add(paddle2.getPaddle2Image());    
             canvas.remove(welcomeText);
-            canvas.remove(directionsText);
+            canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
         });
         canvas.animate(() -> {
             if (isAnimating) {
