@@ -26,7 +26,7 @@ public class CustodyBattle {
     private boolean isAnimating = false;
 
     public CustodyBattle() {
-        makesScoreboard();
+        makeScoreboard();
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         court = new Image(0, 0, "divorce-court-background.jpg");
         
@@ -52,7 +52,7 @@ public class CustodyBattle {
                 ball.updatePosition();
                 keyCheck();
                 intersectsPaddle(ball);
-                checkScore();
+                updateScore();
                 biggerPaddle();
             }
         });
@@ -89,7 +89,7 @@ public class CustodyBattle {
         return false;
     }
 
-    private void makesScoreboard() {
+    private void makeScoreboard() {
         p1PointText = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/3) - 100, 75);
         p2PointText = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/3) + 250, 75);
         p1PointText.setFillColor(Color.WHITE);
@@ -129,7 +129,7 @@ public class CustodyBattle {
         canvas.add(ball.getGraphics());
     }
 
-    private void checkScore() {
+    private void updateScore() {
         if (ball.player1Scored()) {
             pointCounter1 += 100;
             p1PointText.setText("$ " + pointCounter1);
