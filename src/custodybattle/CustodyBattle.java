@@ -18,34 +18,20 @@ public class CustodyBattle {
     private CanvasWindow canvas;
     private Paddle paddle1, paddle2;
     private Ball ball;
-    private GraphicsText p1PointText, p2PointText, welcomeText, directionsText;
+    private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
+    String name;
     private Image court;
     private boolean dadIncreased = false;
     private boolean momIncreased = false;
     private boolean isAnimating = false;
 
     public CustodyBattle() {
-        makeScoreboard();
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
-        court = new Image(0, 0, "divorce-court-background.jpg");
-        
-        court.setScale(0.5, 0.5);
-        court.setCenter(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
-        canvas.add(court);
-    
-        introText();
+        resetGame();
         canvas.onClick((event) -> {
             isAnimating = true;
-            makeBall();
-            makePaddles();
-            canvas.add(p1PointText);
-            canvas.add(p2PointText);
-            canvas.add(ball.getImage());
-            canvas.add(paddle1.getPaddle1Image());
-            canvas.add(paddle2.getPaddle2Image());    
-            canvas.remove(welcomeText);
-            canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
+            startGame();
         });
         canvas.animate(() -> {
             if (isAnimating) {
@@ -54,6 +40,13 @@ public class CustodyBattle {
                 intersectsPaddle(ball);
                 updateScore();
                 biggerPaddle();
+                if (pointCounter1 >= 1000) {
+                    name = "Player 1";
+                    winLogic();
+                } else if(pointCounter2 >= 1000) {
+                    name = "Player 2";
+                    winLogic();
+                }
             }
         });
 
@@ -73,6 +66,13 @@ public class CustodyBattle {
         directionsText.setFillColor(Color.CYAN);
         directionsText.setAlignment(TextAlignment.CENTER);
         canvas.add(directionsText);
+    }
+    
+    private void makeCourt() {
+        court = new Image(0, 0, "divorce-court-background.jpg");
+        court.setScale(0.5, 0.5);
+        court.setCenter(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
+        canvas.add(court);
     }
 
     public boolean intersectsPaddle(Ball ball) {
@@ -137,6 +137,43 @@ public class CustodyBattle {
             pointCounter2 += 100;
             p2PointText.setText("$ " + pointCounter2);
         }
+    }
+
+    private void winLogic() {
+        canvas.removeAll();
+        winText = new GraphicsText(name + " wins!", CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
+        winText.setFillColor(Color.MAGENTA);
+        winText.setAlignment(TextAlignment.CENTER);
+        winText.setFontSize(100);
+        canvas.add(winText);
+        canvas.draw();
+        canvas.pause(3000);
+        resetGame();
+    }
+
+    private void resetGame() { //adds the scoreboard, the intro text and description
+        canvas.removeAll();
+        pointCounter1 = 0;
+        pointCounter2 = 0;
+        dadIncreased = false;
+        momIncreased = false;
+        isAnimating = false;
+        makeScoreboard();
+        makeCourt();
+        introText();
+    }
+
+    private void startGame() { //Adds only the court ball and paddles
+        makeCourt();
+        makeBall();
+        makePaddles();
+        canvas.add(p1PointText);
+        canvas.add(p2PointText);
+        canvas.add(ball.getImage());
+        canvas.add(paddle1.getPaddle1Image());
+        canvas.add(paddle2.getPaddle2Image());    
+        canvas.remove(welcomeText);
+        canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
     }
 
     public void biggerPaddle() {
