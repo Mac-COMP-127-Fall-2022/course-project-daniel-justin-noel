@@ -12,7 +12,7 @@ import edu.macalester.graphics.Image;
 public class Ball extends GraphicsGroup{
 
     private static final double BALL_RADIUS = 15;
-    private static final double speed = 7;
+    private static final double speed = 3*60;   //pixels per second
 
     private Ellipse ball;
     private Image babyHead;
@@ -45,15 +45,18 @@ public class Ball extends GraphicsGroup{
         double initialAngleRadians = Math.toRadians(min + ((max-min) * rand));
         XVelocity = speed + Math.cos(initialAngleRadians);
         YVelocity = speed + -Math.sin(initialAngleRadians);
+        // XVelocity = speed + initialAngleRadians;
+        // YVelocity = speed + initialAngleRadians;
         
     }
     
-    public void updatePosition() {
-        double newX = centerX + XVelocity;
-        double newY = centerY + YVelocity;
+    public void updatePosition(double dt) {
+        double newX = centerX + XVelocity * dt;
+        double newY = centerY + YVelocity * dt;
 
         ball.setCenter(newX, newY);
         babyHead.setCenter(ball.getCenter().getX(), ball.getCenter().getY());
+        babyHead.setRotation((babyHead.getRotation() + 10) % 360);
         centerX = newX;
         centerY = newY;
 

@@ -16,7 +16,7 @@ public class CustodyBattle {
     public static final int CANVAS_WIDTH = 800;
     public static final int CANVAS_HEIGHT = 600;
     private CanvasWindow canvas;
-    private Paddle paddle1, paddle2;
+    private Paddle paddle1, paddle2, lawyer1, lawyer2;
     private Ball ball;
     private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
@@ -33,9 +33,9 @@ public class CustodyBattle {
             isAnimating = true;
             startGame();
         });
-        canvas.animate(() -> {
+        canvas.animate((dt) -> {
             if (isAnimating) {
-                ball.updatePosition();
+                ball.updatePosition(dt);
                 keyCheck();
                 intersectsPaddle(ball);
                 updateScore();
@@ -69,7 +69,7 @@ public class CustodyBattle {
     }
     
     private void makeCourt() {
-        court = new Image(0, 0, "divorce-court-background.jpg");
+        court = new Image(0, 0, "divorce_court.png");
         court.setScale(0.5, 0.5);
         court.setCenter(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
         canvas.add(court);
@@ -103,16 +103,16 @@ public class CustodyBattle {
     public void keyCheck() {
         List<String> keysPressed = canvas.getKeysPressed().stream().map(key -> key.toString()).toList();
         if (keysPressed.contains("S")) {
-            paddle1.movePaddle(10);
+            paddle1.movePaddle(15);
             
         } else if (keysPressed.contains("W")) {
-            paddle1.movePaddle(-10);
+            paddle1.movePaddle(-15);
         }
         
         if (keysPressed.contains("DOWN_ARROW")) {
-            paddle2.movePaddle(10);
+            paddle2.movePaddle(15);
         } else if (keysPressed.contains("UP_ARROW")) {
-            paddle2.movePaddle(-10);
+            paddle2.movePaddle(-15);
         }
     }
 
@@ -176,7 +176,7 @@ public class CustodyBattle {
         canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
     }
 
-    public void biggerPaddle() {
+    private void biggerPaddle() {
         if (pointCounter1 >= 600 && !dadIncreased) {
             dadIncreased = true;
             paddle1.setPaddleHeight(paddle1.getPaddleHeight() + 80, canvas);
@@ -189,6 +189,13 @@ public class CustodyBattle {
                 paddle2.setMom(paddle2.getPaddle2Image());
                 canvas.add(paddle2.getPaddle2Image());
             }
+        }
+    }
+
+    private void lawyerPaddle() {
+        
+        if (pointCounter1 >= 1300) {
+            
         }
     }
 
