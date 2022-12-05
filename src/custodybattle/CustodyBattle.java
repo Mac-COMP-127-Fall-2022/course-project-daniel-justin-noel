@@ -22,9 +22,9 @@ public class CustodyBattle {
     private int pointCounter1, pointCounter2;
     String name;
     private Image court;
-    private boolean dadIncreased = false;
-    private boolean momIncreased = false;
-    private boolean isAnimating = false;
+    private boolean dadIncreased;
+    private boolean momIncreased;
+    private boolean isAnimating;
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -40,10 +40,10 @@ public class CustodyBattle {
                 intersectsPaddle(ball);
                 updateScore();
                 biggerPaddle();
-                if (pointCounter1 >= 1000) {
+                if (pointCounter1 >= 2000) {
                     name = "Player 1";
                     winLogic();
-                } else if(pointCounter2 >= 1000) {
+                } else if(pointCounter2 >= 2000) {
                     name = "Player 2";
                     winLogic();
                 }
@@ -182,22 +182,19 @@ public class CustodyBattle {
             paddle1.setPaddleHeight(paddle1.getPaddleHeight() + 80, canvas);
             paddle1.setDad(paddle1.getPaddle1Image());
             canvas.add(paddle1.getPaddle1Image());
-        } else {
-            if (pointCounter2 >= 600 && !momIncreased) {
+        } else if (pointCounter2 >= 600 && !momIncreased) {
                 momIncreased = true;
                 paddle2.setPaddleHeight(paddle2.getPaddleHeight() + 80, canvas);
                 paddle2.setMom(paddle2.getPaddle2Image());
                 canvas.add(paddle2.getPaddle2Image());
-            }
         }
     }
 
-    private void lawyerPaddle() {
-        
-        if (pointCounter1 >= 1300) {
-            
-        }
-    }
+    // private void lawyerPaddle() {
+    //     if (pointCounter1 >= 1300) {
+    //         lawyer1 = new Paddle(300, 300);
+    //     } else if (p) 
+    // }
 
     public static void main(String[] args){
         new CustodyBattle();
