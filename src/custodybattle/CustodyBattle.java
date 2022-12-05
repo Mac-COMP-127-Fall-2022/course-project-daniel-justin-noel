@@ -103,16 +103,16 @@ public class CustodyBattle {
     public void keyCheck() {
         List<String> keysPressed = canvas.getKeysPressed().stream().map(key -> key.toString()).toList();
         if (keysPressed.contains("S")) {
-            paddle1.movePaddle(15);
+            paddle1.movePaddle(10);
             
         } else if (keysPressed.contains("W")) {
-            paddle1.movePaddle(-15);
+            paddle1.movePaddle(-10);
         }
         
         if (keysPressed.contains("DOWN_ARROW")) {
-            paddle2.movePaddle(15);
+            paddle2.movePaddle(10);
         } else if (keysPressed.contains("UP_ARROW")) {
-            paddle2.movePaddle(-15);
+            paddle2.movePaddle(-10);
         }
     }
 
