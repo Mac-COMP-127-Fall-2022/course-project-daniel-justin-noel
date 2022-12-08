@@ -17,17 +17,19 @@ public class CustodyBattle {
     private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
     String name;
-    private Image court, paulImage;
+    private Image court, paulImage, saulGoodman;
     private boolean dadIncreased;
     private boolean momIncreased;
     private boolean isAnimating;
-    private boolean flag = false;
-    private boolean flag2 = false;
+    private boolean lawyer1Appears = false;
+    private boolean lawyer2Appears = false;
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         lawyer1 = new Paddle((CANVAS_WIDTH/3) + 50, (CANVAS_HEIGHT/3)*2);
-        lawyer2 = new Paddle((CANVAS_WIDTH/3) *2, (CANVAS_HEIGHT/3)*2);
+        lawyer2 = new Paddle((CANVAS_WIDTH/3)*2, (CANVAS_HEIGHT/3));
+        saulGoodman = new Image(lawyer1.getCenter().getX(), lawyer1.getCenter().getY(), "saulgoodman-removebg-preview.png");
+
         resetGame();
         canvas.onClick((event) -> {
             isAnimating = true;
@@ -77,7 +79,7 @@ public class CustodyBattle {
     }
 
     private void intersectsPaddle(Ball ball) {
-        if (flag) {
+        if (lawyer1Appears) {
             if (lawyer1.testHit(ball.ballLeftSide())) {
                 ball.positiveXVel();
             } else if (lawyer1.testHit(ball.ballRightSide())) {
@@ -88,7 +90,7 @@ public class CustodyBattle {
                 ball.negativeYVel();
             }   
         }
-        if (flag2) {
+        if (lawyer2Appears) {
             if (lawyer2.testHit(ball.ballLeftSide())) {
                 ball.positiveXVel();
             } else if (lawyer2.testHit(ball.ballRightSide())) {
@@ -180,7 +182,7 @@ public class CustodyBattle {
         dadIncreased = false;
         momIncreased = false;
         isAnimating = false;
-        flag = false;
+        lawyer1Appears = false;
         makeScoreboard();
         makeCourt();
         introText();
@@ -201,6 +203,8 @@ public class CustodyBattle {
         canvas.add(paddle2.getPaddle2Image());    
         canvas.remove(welcomeText);
         canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
+        canvas.draw();
+        canvas.pause(3000);
     }
 
     private void biggerPaddle() {
@@ -219,11 +223,13 @@ public class CustodyBattle {
 
     private void makeLawyerPaddle() {
         if (pointCounter1 >= 300) {
-            flag = true;
+            lawyer1Appears = true;
+            saulGoodman.setScale(0.5);
             canvas.add(lawyer1.getGraphics());
+            canvas.add(saulGoodman);
         } 
         if (pointCounter2 >= 300) {
-            flag2 = true;
+            lawyer2Appears = true;
             canvas.add(lawyer2.getGraphics());
         }
     }
