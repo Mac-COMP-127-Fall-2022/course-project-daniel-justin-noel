@@ -1,15 +1,11 @@
 package custodybattle;
 import java.awt.Color;
 import java.util.List;
-import java.util.Timer;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
-import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
-import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.TextAlignment;
-import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.Image;
 
 public class CustodyBattle {
@@ -21,13 +17,17 @@ public class CustodyBattle {
     private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
     String name;
-    private Image court;
+    private Image court, paulImage;
     private boolean dadIncreased;
     private boolean momIncreased;
     private boolean isAnimating;
+    private boolean flag = false;
+    private boolean flag2 = false;
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
+        lawyer1 = new Paddle((CANVAS_WIDTH/3) + 50, (CANVAS_HEIGHT/3)*2);
+        lawyer2 = new Paddle((CANVAS_WIDTH/3) *2, (CANVAS_HEIGHT/3)*2);
         resetGame();
         canvas.onClick((event) -> {
             isAnimating = true;
@@ -40,10 +40,11 @@ public class CustodyBattle {
                 intersectsPaddle(ball);
                 updateScore();
                 biggerPaddle();
+                makeLawyerPaddle();
                 if (pointCounter1 >= 2000) {
                     name = "Player 1";
                     winLogic();
-                } else if(pointCounter2 >= 2000) {
+                } else if (pointCounter2 >= 2000) {
                     name = "Player 2";
                     winLogic();
                 }
@@ -60,7 +61,7 @@ public class CustodyBattle {
         welcomeText.setAlignment(TextAlignment.CENTER);
         canvas.add(welcomeText);
 
-        directionsText = new GraphicsText("You've prolly played Pong\nbefore tbh.\nFigure it out\n(hint: use the keys)", CANVAS_WIDTH/2, (CANVAS_HEIGHT/2) +20);
+        directionsText = new GraphicsText("HOW TO PLAY:\n For Player 1 (lefthand paddle) use \n W/S to move.\n For Player 2 (righthand paddle) use the \n UP/DOWN arrow keys", CANVAS_WIDTH/2, (CANVAS_HEIGHT/2) +50);
         directionsText.setFontSize(30);
         directionsText.setFontStyle(FontStyle.BOLD);
         directionsText.setFillColor(Color.CYAN);
@@ -76,16 +77,36 @@ public class CustodyBattle {
     }
 
     private void intersectsPaddle(Ball ball) {
+        if (flag) {
+            if (lawyer1.testHit(ball.ballLeftSide())) {
+                ball.positiveXVel();
+            } else if (lawyer1.testHit(ball.ballRightSide())) {
+                ball.negativeXVel();
+            } else if (lawyer1.testHit(ball.ballTopSide())) {
+                ball.positiveYVel();
+            } else if (lawyer1.testHit(ball.ballBottomSide())) {
+                ball.negativeYVel();
+            }   
+        }
+        if (flag2) {
+            if (lawyer2.testHit(ball.ballLeftSide())) {
+                ball.positiveXVel();
+            } else if (lawyer2.testHit(ball.ballRightSide())) {
+                ball.negativeXVel();
+            } else if (lawyer2.testHit(ball.ballTopSide())) {
+                ball.positiveYVel();
+            } else if (lawyer2.testHit(ball.ballBottomSide())) {
+                ball.negativeYVel();
+            }
+        }
+
         if (paddle1.testHit(ball.ballLeftSide()) || paddle2.testHit(ball.ballLeftSide())) {
             ball.positiveXVel();
-        }
-        if (paddle1.testHit(ball.ballRightSide()) || paddle2.testHit(ball.ballRightSide())) {
+        } else if (paddle1.testHit(ball.ballRightSide()) || paddle2.testHit(ball.ballRightSide()) ) {
             ball.negativeXVel();
-        }
-        if (paddle1.testHit(ball.ballTopSide()) || paddle2.testHit(ball.ballTopSide())) {
+        } else if (paddle1.testHit(ball.ballTopSide()) || paddle2.testHit(ball.ballTopSide())) {
             ball.positiveYVel();
-        }
-        if (paddle1.testHit(ball.ballBottomSide()) || paddle2.testHit(ball.ballBottomSide())) {
+        } else if (paddle1.testHit(ball.ballBottomSide()) || paddle2.testHit(ball.ballBottomSide())) {
             ball.negativeYVel();
         }
     }
@@ -159,6 +180,7 @@ public class CustodyBattle {
         dadIncreased = false;
         momIncreased = false;
         isAnimating = false;
+        flag = false;
         makeScoreboard();
         makeCourt();
         introText();
@@ -168,6 +190,10 @@ public class CustodyBattle {
         makeCourt();
         makeBall();
         makePaddles();
+        paulImage = new Image(0, 0, "paulface1-removebg-preview.png");
+        paulImage.setScale(0.395);
+        paulImage.setCenter(CANVAS_WIDTH/2 - 10, CANVAS_HEIGHT/2 - 92);
+        canvas.add(paulImage);
         canvas.add(p1PointText);
         canvas.add(p2PointText);
         canvas.add(ball.getImage());
@@ -184,18 +210,23 @@ public class CustodyBattle {
             paddle1.setDad(paddle1.getPaddle1Image());
             canvas.add(paddle1.getPaddle1Image());
         } else if (pointCounter2 >= 600 && !momIncreased) {
-                momIncreased = true;
-                paddle2.setPaddleHeight(paddle2.getPaddleHeight() + 80, canvas);
-                paddle2.setMom(paddle2.getPaddle2Image());
-                canvas.add(paddle2.getPaddle2Image());
+            momIncreased = true;
+            paddle2.setPaddleHeight(paddle2.getPaddleHeight() + 80, canvas);
+            paddle2.setMom(paddle2.getPaddle2Image());
+            canvas.add(paddle2.getPaddle2Image());
         }
     }
 
-    // private void lawyerPaddle() {
-    //     if (pointCounter1 >= 1300) {
-    //         lawyer1 = new Paddle(300, 300);
-    //     } else if (p) 
-    // }
+    private void makeLawyerPaddle() {
+        if (pointCounter1 >= 300) {
+            flag = true;
+            canvas.add(lawyer1.getGraphics());
+        } 
+        if (pointCounter2 >= 300) {
+            flag2 = true;
+            canvas.add(lawyer2.getGraphics());
+        }
+    }
 
     public static void main(String[] args){
         new CustodyBattle();

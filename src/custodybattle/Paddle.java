@@ -9,7 +9,7 @@ import java.awt.Color;
 
 
 public class Paddle extends GraphicsGroup {
-    private Rectangle paddle;
+    private Rectangle paddle, laywer1;
     private Image dad, mom;
     private double centerX, centerY;
     private final double PADDLE_WIDTH = 25;
@@ -19,14 +19,15 @@ public class Paddle extends GraphicsGroup {
         this.centerX = centerX;
         this.centerY = centerY;
         paddle = new Rectangle(centerX, centerY, PADDLE_WIDTH, paddleHeight);
-        paddle.setFillColor(Color.WHITE);
+        // paddle.setFillColor(Color.WHITE);
         paddle.setStrokeColor(Color.WHITE);
+        paddle.setStrokeWidth(.1);
 
-        // peter angry.png
-        // Mac-sheila.png
-        dad = new Image(centerX - 50, centerY - 2.5, "");
+        
+        dad = new Image(centerX - 45, centerY - 2.5, "peter angry.png");
         dad.setMaxHeight(130);
-        mom = new Image(centerX - 35, centerY - 10, "");
+
+        mom = new Image(centerX - 30, centerY - 10, "Mac-sheila.png");
         mom.setMaxHeight(140);
 
     }
@@ -80,14 +81,14 @@ public class Paddle extends GraphicsGroup {
         
         canvas.remove(paddle);
         paddle = new Rectangle(xVal, yVal, PADDLE_WIDTH, paddleHeight);
-        paddle.setFillColor(Color.WHITE);
+        // paddle.setFillColor(Color.WHITE);
         paddle.setStrokeColor(Color.WHITE);
+        paddle.setStrokeWidth(.1);
         canvas.add(paddle);
     }
 
     public double getPaddleHeight() {
         return paddleHeight;
     }
-
 
 }
