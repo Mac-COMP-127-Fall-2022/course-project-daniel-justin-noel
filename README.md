@@ -17,7 +17,7 @@ The main class animates both the ball and paddle for movement, and updates the s
 by increments of $100. This class determines whether the ball has hit any of the paddles, and reflects the ball if it does. This class checks for which keys were pressed, putting them within a list and moving the paddles.
 
 References obtained from COMP127, Breakout HW, Preceptors Tim, Jeremy, Miriam, and Pong.
-Art references include 'The Simpsons', 'The Boss Baby' and 'South Park'. 
+Art references include 'Family Guy', 'The Boss Baby' and 'South Park'. 
 
 
 This project is a fusion of 3 different animated characters from alternate universes. The concept of the game is within the title of the game, "Custody Battle", where we can see two terrible parents fighting over an innocent baby. The important underlying message of this project is to highlight the issues of divorce, maintaining that it is never the child's fault in any scenario if a custody battle ever happens. 
