@@ -33,9 +33,9 @@ public class CustodyBattle {
             isAnimating = true;
             startGame();
         });
-        canvas.animate((dt) -> {
+        canvas.animate(() -> {
             if (isAnimating) {
-                ball.updatePosition(dt);
+                ball.updatePosition();
                 keyCheck();
                 intersectsPaddle(ball);
                 updateScore();
@@ -75,18 +75,19 @@ public class CustodyBattle {
         canvas.add(court);
     }
 
-    public boolean intersectsPaddle(Ball ball) {
-        if (paddle1.testHit(ball.ballLeftSide()) || paddle1.testHit(ball.ballRightSide())
-            || paddle2.testHit(ball.ballLeftSide()) || paddle2.testHit(ball.ballRightSide())) {
-            ball.setReverseXVel();
-            return true;
-
-        } else if (paddle1.testHit(ball.ballTopSide()) || paddle1.testHit(ball.ballBottomSide())
-            || paddle2.testHit(ball.ballTopSide()) || paddle2.testHit(ball.ballBottomSide())) {
-            ball.setReverseYVel();
-            return true;
+    private void intersectsPaddle(Ball ball) {
+        if (paddle1.testHit(ball.ballLeftSide()) || paddle2.testHit(ball.ballLeftSide())) {
+            ball.positiveXVel();
         }
-        return false;
+        if (paddle1.testHit(ball.ballRightSide()) || paddle2.testHit(ball.ballRightSide())) {
+            ball.negativeXVel();
+        }
+        if (paddle1.testHit(ball.ballTopSide()) || paddle2.testHit(ball.ballTopSide())) {
+            ball.positiveYVel();
+        }
+        if (paddle1.testHit(ball.ballBottomSide()) || paddle2.testHit(ball.ballBottomSide())) {
+            ball.negativeYVel();
+        }
     }
 
     private void makeScoreboard() {

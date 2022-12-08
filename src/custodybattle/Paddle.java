@@ -12,7 +12,7 @@ public class Paddle extends GraphicsGroup {
     private Rectangle paddle;
     private Image dad, mom;
     private double centerX, centerY;
-    private final double PADDLE_WIDTH = 10;
+    private final double PADDLE_WIDTH = 25;
     private double paddleHeight = 100;
 
     public Paddle(double centerX, double centerY) {
@@ -22,9 +22,11 @@ public class Paddle extends GraphicsGroup {
         paddle.setFillColor(Color.WHITE);
         paddle.setStrokeColor(Color.WHITE);
 
-        dad = new Image(centerX - 50, centerY - 2.5, "peter angry.png");
+        // peter angry.png
+        // Mac-sheila.png
+        dad = new Image(centerX - 50, centerY - 2.5, "");
         dad.setMaxHeight(130);
-        mom = new Image(centerX - 35, centerY - 10, "Mac-sheila.png");
+        mom = new Image(centerX - 35, centerY - 10, "");
         mom.setMaxHeight(140);
 
     }

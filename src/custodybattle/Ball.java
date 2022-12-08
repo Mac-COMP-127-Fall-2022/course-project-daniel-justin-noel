@@ -11,8 +11,8 @@ import edu.macalester.graphics.Image;
 
 public class Ball extends GraphicsGroup{
 
-    private static final double BALL_RADIUS = 15;
-    private static final double speed = 5*60;   //pixels per second
+    private static final double BALL_RADIUS = 30;
+    private static final double speed = 15;   //pixels per second
 
     private Ellipse ball;
     private Image babyHead;
@@ -50,9 +50,9 @@ public class Ball extends GraphicsGroup{
         
     }
     
-    public void updatePosition(double dt) {
-        double newX = centerX + XVelocity * dt;
-        double newY = centerY + YVelocity * dt;
+    public void updatePosition() {
+        double newX = centerX + XVelocity;
+        double newY = centerY + YVelocity;
 
         ball.setCenter(newX, newY);
         babyHead.setCenter(ball.getCenter().getX(), ball.getCenter().getY());
@@ -61,12 +61,17 @@ public class Ball extends GraphicsGroup{
         centerY = newY;
 
 
-        if (newX <= 0 || newX >= maxX) {
-            XVelocity *= -1;
-            
+        if (ballTopSide().getY() <= 0) {
+            positiveYVel();
         }
-        if (newY <= 0 || newY >= maxY) {
-            YVelocity *= -1;
+        if (ballBottomSide().getY() >= maxY) {
+            negativeYVel();
+        }
+        if (ballLeftSide().getX() <=0) {
+            positiveXVel();
+        }
+        if (ballRightSide().getX() >= maxX) {
+            negativeXVel();
         }
     }
 
@@ -82,12 +87,20 @@ public class Ball extends GraphicsGroup{
         return centerY;
     }
 
-    public void setReverseXVel() {
-        XVelocity *= -1;
+    public void negativeXVel() {
+        XVelocity = -Math.abs(XVelocity);
     }
 
-    public void setReverseYVel() {
-        YVelocity *= -1;
+    public void positiveXVel() {
+        XVelocity = Math.abs(XVelocity);
+    }
+
+    public void negativeYVel() {
+        YVelocity = -Math.abs(YVelocity);
+    }
+
+    public void positiveYVel() {
+        YVelocity = Math.abs(YVelocity);
     }
 
     public void setXVelocity(double xVelocity) {
@@ -128,11 +141,11 @@ public class Ball extends GraphicsGroup{
     }
 
     public boolean player1Scored() {
-        return ballBottomSide().getX() >= maxX;
+        return ballRightSide().getX() >= maxX;
     }
 
     public boolean player2Scored() {
-        return ballTopSide().getX() <= 0;
+        return ballLeftSide().getX() <= 0;
     }
 
     public Image getImage() {
