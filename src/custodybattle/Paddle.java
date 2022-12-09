@@ -9,8 +9,8 @@ import java.awt.Color;
 
 
 public class Paddle extends GraphicsGroup {
-    private Rectangle paddle, laywer1;
-    private Image dad, mom;
+    private Rectangle paddle;
+    private Image dad, mom, saulGoodman, mattMurdock;
     private double centerX, centerY;
     private final double PADDLE_WIDTH = 25;
     private double paddleHeight = 100;
@@ -30,6 +30,9 @@ public class Paddle extends GraphicsGroup {
         mom = new Image(centerX - 30, centerY - 10, "Mac-sheila.png");
         mom.setMaxHeight(140);
 
+        saulGoodman = new Image(centerX, centerY, "saulgoodman-removebg-preview.png");
+
+        mattMurdock = new Image(centerX, centerY, "mattMurdock-removebg-preview.png");
     }
 
     public void movePaddle(double dy) {  //dy is prolly just the change in y values
@@ -45,6 +48,26 @@ public class Paddle extends GraphicsGroup {
 
     public Image getPaddle1Image() {
         return dad;
+    }
+
+    public Image getLawyer1Image() {
+        return saulGoodman;
+    }
+    
+    public Image getLawyer2Image() {
+        return mattMurdock;
+    }
+
+    public void setSaul(Image saulGoodman) {
+        this.saulGoodman = saulGoodman;
+        saulGoodman.setMaxHeight(120);
+        saulGoodman.setCenter(paddle.getCenter().getX(), paddle.getCenter().getY());
+    }
+
+    public void setMatt(Image mattMurdock) {
+        this.mattMurdock = mattMurdock;
+        mattMurdock.setMaxHeight(145);
+        mattMurdock.setCenter(paddle.getCenter().getX() - 5, paddle.getCenter().getY() - 15);
     }
     
     public void setDad(Image dad) {

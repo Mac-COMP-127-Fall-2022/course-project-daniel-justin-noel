@@ -17,7 +17,7 @@ public class CustodyBattle {
     private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
     String name;
-    private Image court, paulImage, saulGoodman;
+    private Image court, paulImage;
     private boolean dadIncreased;
     private boolean momIncreased;
     private boolean isAnimating;
@@ -26,9 +26,6 @@ public class CustodyBattle {
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
-        lawyer1 = new Paddle((CANVAS_WIDTH/3) + 50, (CANVAS_HEIGHT/3)*2);
-        lawyer2 = new Paddle((CANVAS_WIDTH/3)*2, (CANVAS_HEIGHT/3));
-        saulGoodman = new Image(lawyer1.getCenter().getX(), lawyer1.getCenter().getY(), "saulgoodman-removebg-preview.png");
 
         resetGame();
         canvas.onClick((event) -> {
@@ -144,6 +141,8 @@ public class CustodyBattle {
     public void makePaddles() {
         paddle1 = new Paddle(CANVAS_WIDTH/8, CANVAS_HEIGHT/2);
         paddle2 = new Paddle((CANVAS_WIDTH/8)*7, CANVAS_HEIGHT/2);
+        lawyer1 = new Paddle((CANVAS_WIDTH/3) + 50, (CANVAS_HEIGHT/3)*2);
+        lawyer2 = new Paddle((CANVAS_WIDTH/3)*2, (CANVAS_HEIGHT/3));
         canvas.add(paddle1.getGraphics());
         canvas.add(paddle2.getGraphics());
     }
@@ -202,7 +201,7 @@ public class CustodyBattle {
         canvas.add(paddle1.getPaddle1Image());
         canvas.add(paddle2.getPaddle2Image());    
         canvas.remove(welcomeText);
-        canvas.remove(directionsText);   // maybe try adding some sort of counttdown before the game starts
+        canvas.remove(directionsText);
         canvas.draw();
         canvas.pause(3000);
     }
@@ -222,15 +221,17 @@ public class CustodyBattle {
     }
 
     private void makeLawyerPaddle() {
-        if (pointCounter1 >= 300) {
+        if (pointCounter1 >= 1300) {
             lawyer1Appears = true;
-            saulGoodman.setScale(0.5);
             canvas.add(lawyer1.getGraphics());
-            canvas.add(saulGoodman);
+            lawyer1.setSaul(lawyer1.getLawyer1Image());
+            canvas.add(lawyer1.getLawyer1Image());
         } 
-        if (pointCounter2 >= 300) {
+        if (pointCounter2 >= 1300) {
             lawyer2Appears = true;
             canvas.add(lawyer2.getGraphics());
+            lawyer2.setMatt(lawyer2.getLawyer2Image());
+            canvas.add(lawyer2.getLawyer2Image());
         }
     }
 
