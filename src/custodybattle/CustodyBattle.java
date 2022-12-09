@@ -16,13 +16,15 @@ public class CustodyBattle {
     private Ball ball;
     private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
     private int pointCounter1, pointCounter2;
-    String name;
+    private String name;
     private Image court, paulImage;
     private boolean dadIncreased;
     private boolean momIncreased;
     private boolean isAnimating;
     private boolean lawyer1Appears = false;
     private boolean lawyer2Appears = false;
+    private boolean flag = false;
+    private boolean flag2 = false;
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -38,7 +40,12 @@ public class CustodyBattle {
                 intersectsPaddle(ball);
                 updateScore();
                 biggerPaddle();
-                makeLawyerPaddle();
+                if (!flag) {
+                    makeLawyer1Paddle();
+                }
+                if (!flag2) {
+                    makeLawyer2Paddle();
+                }
                 if (pointCounter1 >= 2000) {
                     name = "Player 1";
                     winLogic();
@@ -219,20 +226,27 @@ public class CustodyBattle {
         }
     }
 
-    private void makeLawyerPaddle() {
+    private void makeLawyer1Paddle() {
         if (pointCounter1 >= 1300) {
             lawyer1Appears = true;
             canvas.add(lawyer1.getGraphics());
             lawyer1.setSaul(lawyer1.getLawyer1Image());
             canvas.add(lawyer1.getLawyer1Image());
+            flag = true;
         } 
+    }
+
+    private void makeLawyer2Paddle() {
         if (pointCounter2 >= 1300) {
             lawyer2Appears = true;
             canvas.add(lawyer2.getGraphics());
             lawyer2.setMatt(lawyer2.getLawyer2Image());
             canvas.add(lawyer2.getLawyer2Image());
+            flag2 = true;
         }
     }
+
+
 
     public static void main(String[] args){
         new CustodyBattle();
