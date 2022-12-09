@@ -26,7 +26,6 @@ public class CustodyBattle {
 
     public CustodyBattle() {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
-
         resetGame();
         canvas.onClick((event) -> {
             isAnimating = true;
