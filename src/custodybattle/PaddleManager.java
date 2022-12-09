@@ -1,5 +1,5 @@
 package custodybattle;
 
-public interface UI {
+public class PaddleManager {
     
 }
