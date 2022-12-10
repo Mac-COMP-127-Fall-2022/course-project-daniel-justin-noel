@@ -14,8 +14,8 @@ public class CustodyBattle {
     private CanvasWindow canvas;
     private Paddle paddle1, paddle2, lawyer1, lawyer2;
     private Ball ball;
-    private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
-    private int pointCounter1, pointCounter2;
+    // private GraphicsText p1PointText, p2PointText, welcomeText, directionsText, winText;
+    // private int pointCounter1, pointCounter2;
     private String name;
     private Image court, paulImage;
     private boolean dadIncreased;
@@ -33,6 +33,8 @@ public class CustodyBattle {
      * resets.
      */
     public CustodyBattle() {
+        UI uI = new UI(canvas);
+        // uI.makeScoreboard();
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         resetGame();
         canvas.onClick((event) -> {
@@ -112,16 +114,16 @@ public class CustodyBattle {
     /**
      * Creates the points (i.e, dollars) to be displayed on the canvas. Does not add them to the canvas.
      */
-    private void makeScoreboard() {
-        p1PointText = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/3) - 100, 75);
-        p2PointText = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/3) + 250, 75);
-        p1PointText.setFillColor(Color.WHITE);
-        p2PointText.setFillColor(Color.WHITE);
-        p1PointText.setFontSize(50);
-        p2PointText.setFontSize(50);
-        p1PointText.setFontStyle(FontStyle.BOLD_ITALIC);
-        p2PointText.setFontStyle(FontStyle.BOLD_ITALIC);
-    }
+    // private void makeScoreboard() {
+    //     p1PointText = new GraphicsText("$ " + pointCounter1, (CANVAS_WIDTH/3) - 100, 75);
+    //     p2PointText = new GraphicsText("$ " + pointCounter2, (CANVAS_WIDTH/3) + 250, 75);
+    //     p1PointText.setFillColor(Color.WHITE);
+    //     p2PointText.setFillColor(Color.WHITE);
+    //     p1PointText.setFontSize(50);
+    //     p2PointText.setFontSize(50);
+    //     p1PointText.setFontStyle(FontStyle.BOLD_ITALIC);
+    //     p2PointText.setFontStyle(FontStyle.BOLD_ITALIC);
+    // }
 
     /**
      * Creates a list of strings referencing the keys pressed on canvas. W/S move Player 1 while DownArrow/
@@ -205,7 +207,7 @@ public class CustodyBattle {
         momIncreased = false;
         isAnimating = false;
         lawyer1Appears = false;
-        makeScoreboard();
+        uI.makeScoreboard();
         makeCourt();
         introText();
     }
