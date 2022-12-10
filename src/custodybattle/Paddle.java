@@ -86,14 +86,6 @@ public class Paddle extends GraphicsGroup {
         return mom;
     }
 
-    // public void addL1ToCanvas(CanvasWindow canvas) {
-    //     canvas.add(saulGoodman);
-    // }
-    
-    // public void addL2ToCanvas(CanvasWindow canvas) {
-    //     canvas.add(mattMurdock);
-    // }
-
     public boolean testHit(Point point) {
         return paddle.testHit(point.getX(), point.getY());
     }
@@ -118,7 +110,17 @@ public class Paddle extends GraphicsGroup {
         canvas.add(paddle);
     }
 
-    
+    public void intersects(Ball ball, Paddle paddle) {
+        if (paddle.testHit(ball.ballLeftSide())) {
+            ball.positiveXVel();
+        } else if (paddle.testHit(ball.ballRightSide())) {
+            ball.negativeXVel();
+        } else if (paddle.testHit(ball.ballTopSide())) {
+            ball.positiveYVel();
+        } else if (paddle.testHit(ball.ballBottomSide())) {
+            ball.negativeYVel();
+        }
+    }
 
     public double getPaddleHeight() {
         return paddleHeight;
