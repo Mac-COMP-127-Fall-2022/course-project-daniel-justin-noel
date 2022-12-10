@@ -24,6 +24,6 @@ BUGS
 There is a bug when the paddle will get stuck if it increases size near the edge of the canvas. The image and paddle size increases, but the player is unable to move the paddles with the movement keys. 
 
 PURPOSE
-This project is a fusion of different characters from alternate universes. The concept of the game is within the title of the game, "Custody Battle", where we can see two terrible parents fighting over an innocent baby. This project was created for entertainment purposes only, using references that people would recognize. Even though we are using fictional characters, we can acknowledge the realness of divorce and the struggles of a custody battle through this game. on a side note, if you are a part of a divorce settlement, lol get wrekt -Justin. 
+This project is a fusion of different characters from alternate universes. The concept of the game is within the title of the game, "Custody Battle", where we can see two terrible parents fighting over an innocent baby. This project was created for entertainment purposes only, using references that people would recognize. Even though we are using fictional characters, we can acknowledge the realness of divorce and the struggles of a custody battle through this game.
 
  
