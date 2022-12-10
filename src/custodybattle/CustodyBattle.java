@@ -21,7 +21,6 @@ public class CustodyBattle {
     private boolean dadIncreased;
     private boolean momIncreased;
     private boolean isAnimating;
-    // private PaddleManager paddleManager;
     private boolean lawyer1Appears = false;
     private boolean lawyer2Appears = false;
     private boolean flag = false;
@@ -133,12 +132,9 @@ public class CustodyBattle {
         List<String> keysPressed = canvas.getKeysPressed().stream().map(key -> key.toString()).toList();
         if (keysPressed.contains("S")) {
             paddle1.movePaddle(10);
-            
         } else if (keysPressed.contains("W")) {
             paddle1.movePaddle(-10);
-        }
-        
-        if (keysPressed.contains("DOWN_ARROW")) {
+        } else if (keysPressed.contains("DOWN_ARROW")) {
             paddle2.movePaddle(10);
         } else if (keysPressed.contains("UP_ARROW")) {
             paddle2.movePaddle(-10);
