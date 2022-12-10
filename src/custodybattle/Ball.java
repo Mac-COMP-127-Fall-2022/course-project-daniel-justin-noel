@@ -9,6 +9,9 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Image;
 
+
+
+
 public class Ball extends GraphicsGroup{
 
     private static final double BALL_RADIUS = 30;
@@ -23,7 +26,15 @@ public class Ball extends GraphicsGroup{
     private double XVelocity;
     private double YVelocity;
 
-
+    
+    /**
+     * A ball is an ellipse with a certain radius, with a centerX position
+     * and centerY position. Each ball has a respective image associated with it.
+     * @param centerX The center x coordinate of a ball in accordance to its position on the canvas
+     * @param centerY The center y coordinate of a ball in accordance to its position on the canvas
+     * @param maxX The maximum x coordinate of a ball
+     * @param maxY The maximum x coordinate of a ball
+     */
     public Ball(double centerX, double centerY, double maxX, double maxY) {
         ball = new Ellipse(centerX, centerY, BALL_RADIUS, BALL_RADIUS);
         ball.setFillColor(Color.BLACK);
@@ -50,6 +61,11 @@ public class Ball extends GraphicsGroup{
         
     }
     
+    /**
+     * This allows the position of the ball to change by setting its center
+     * using newly calculated x and y coordinate values. There are conditionals that address
+     * when the direction of the ball should change its postion relative to its maxX and maxY coordinates.
+     */
     public void updatePosition() {
         double newX = centerX + XVelocity;
         double newY = centerY + YVelocity;
