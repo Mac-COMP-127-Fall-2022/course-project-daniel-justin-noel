@@ -18,9 +18,7 @@ public class CustodyBattle {
     private int pointCounter1, pointCounter2;
     private String name;
     private Image court, paulImage;
-    private boolean dadIncreased;
-    private boolean momIncreased;
-    private boolean isAnimating;
+    private boolean dadIncreased, momIncreased, isAnimating;
     private boolean lawyer1Appears = false;
     private boolean lawyer2Appears = false;
     private boolean flag = false;
