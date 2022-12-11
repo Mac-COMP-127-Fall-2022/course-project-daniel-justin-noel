@@ -3,7 +3,7 @@ Justin Chalichemala
 Noel Raehl
 Daniel Seo
 
-SUMMARY
+## SUMMARY
 A twist on the classic game Pong, this is a two-player competitive game with some famous recognizable characters!
 
 TECHNICAL GUIDE
