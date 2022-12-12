@@ -26,13 +26,12 @@ The CustodyBattle class serves as the main class that contains methods contribui
 References obtained from COMP127, Breakout HW, Preceptors Tim, Jeremy, Miriam, and Pong.
 Art references include 'Family Guy', 'The Boss Baby', 'South Park', 'Daredevil', and 'Better Call Saul'.
 
-## Design Limitations
+## DESIGN LIMITATIONS
 The game _may_ have some frame lags because multiple graphical objects are moving across the screen. Yet, this shouldn't be a problem in the long run since much of it also depends on the processor of the user's computer. Also, currently the ball only shoots towards the righthand side of the screen.
 
 ## BUGS
 Currently, there aren't any major technical limitations or bugs that prevent the game from functioning. 
-However, there is a rare chance that the ball can get stuck on the edge of the canvas, but ultimately it
-should not be a noticeable problem during gameplay.
+However, there is a _very rare_ chance that the ball can get stuck on the edge of the canvas, but ultimately it should not be a noticeable problem during gameplay.
 
 ## PURPOSE
 This project is a fusion of different characters from alternate universes. The concept of the game is within the title of the game, "Custody Battle", where we can see two terrible parents fighting over an innocent baby. This project was created for entertainment purposes only, using pop-culture references that people would recognize. Even though we are using fictional characters, we can acknowledge the realness of divorce and the struggles people experience in the real world. Understanding that this game could potentially be used as a way to undermine the real emotional impact of such circumstances does present the game as offensive, but the intention was that it was purely made for entertainment.
