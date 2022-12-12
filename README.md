@@ -20,7 +20,7 @@ be moved around (paddle1 and paddle2) in which they can be controlled using the 
 
 The UI class manages the scoring and displays the beginning text prior to the game starting.
 
-The CustodyBattle class serves as the main class that contains methods contribuiting to the game's function. These methods are, but not limited to, the power-ups, resetting the game, and checking which keys are pressed by mapping each key to a list and running a check on them. In order to run the game, a player must click the mouse on the canvas and wait 3 seconds before the ball begins to move.
+The CustodyBattle class serves as the main class that contains methods contribuiting to the game's function. These methods are, but not limited to, the power-ups, resetting the game, and checking which keys are pressed by mapping each key to a list and running a check on them. In order to run the game, a player must click the mouse on the canvas and wait 3 seconds before the ball begins to move. The game also contains two power-ups that increase paddle size based on the amount of points that each player accumulates and lawyers that the players summon when they are on the brink of victory. 
 
 ## CREDIT
 References obtained from COMP127, Breakout HW, Preceptors Tim, Jeremy, Miriam, and Pong.
