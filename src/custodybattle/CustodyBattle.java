@@ -50,7 +50,7 @@ public class CustodyBattle {
                 name = uI.updateScore(ball);
                 if (name != null)
                     winLogic();
-                biggerPaddle();
+                    biggerPaddle();
                 if (!lawyer1Appears) {
                     makeLawyer1Paddle();
                 }

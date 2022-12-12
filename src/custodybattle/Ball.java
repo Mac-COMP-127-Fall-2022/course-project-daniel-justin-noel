@@ -12,7 +12,7 @@ import edu.macalester.graphics.Image;
  */
 public class Ball{
     private static final double BALL_RADIUS = 30;
-    private static final double speed = 15;
+    private static final double speed = 9;
 
     private Ellipse ball;
     private Image babyHead;
