@@ -2,10 +2,7 @@ package custodybattle;
 
 import java.awt.Color;
 import java.util.Random;
-
-import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
-import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Image;
 

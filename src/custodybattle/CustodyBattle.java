@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.Image;
@@ -37,8 +36,11 @@ public class CustodyBattle {
         canvas = new CanvasWindow("Custody Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         resetGame();
         canvas.onClick((event) -> {
-            isAnimating = true;
-            startGame();
+            if (!isAnimating) {
+                isAnimating = true;
+                startGame();
+            }
+
         });
         canvas.animate(() -> {
             if (isAnimating) {
@@ -152,6 +154,7 @@ public class CustodyBattle {
         momIncreased = false;
         isAnimating = false;
         lawyer1Appears = false;
+        lawyer2Appears = false;
         uI.makeScoreboard();
         makeCourt();
         uI.introText(canvas);
