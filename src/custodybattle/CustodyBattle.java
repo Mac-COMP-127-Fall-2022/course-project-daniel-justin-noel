@@ -65,7 +65,7 @@ public class CustodyBattle {
      * Makes the background court area to be displayed on canvas.
      */
     private void makeCourt() {
-        court = new Image(0, 0, "divorce_court.png");
+        court = new Image(0, 0, "background2.png");
         court.setScale(0.5, 0.5);
         court.setCenter(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
         canvas.add(court);
